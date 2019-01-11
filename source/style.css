@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.column {
+  padding: 25px;
+}
+.inlineimg {
+  display: inline;
+}
+#ui-bar-tray {
+  visibility: hidden;
+}
+.hidden {
+  visibility: hidden;
+}
+.floatleft {
+  float: left;
+  display: inline-block;
+}
+.floatright {
+  float: right;
+  display: inline-block;
+}
+body {
+  background-color: black;
+}
+.shadow {
+filter: drop-shadow(16px 16px 20px red) invert(75%);
+filter: url("../Assets/ui/pistol_icon.svg");
+}
+Button {
+  background:    #000000;
+  background:    -webkit-linear-gradient(#ff0000, #000000 50%, #ff0000);
+  background:    linear-gradient(#ff0000, #000000 50%, #ff0000);
+  border:        4px solid #4c1130;
+  border-radius: 0px;
+  box-shadow:    0 4px #444444;
+  padding:       11px 23px;
+  color:         #ffffff;
+  display:       inline-block;
+  font:          normal 400 31px/1 "Roboto", sans-serif;
+  text-align:    center;
+  text-shadow:   2px 2px #000000;}
+Button:hover {
+  background:    #000000;
+  background:    -webkit-linear-gradient(#ff0000, #000000 50%, #ff0000);
+  background:    linear-gradient(#ff0000, #000000 50%, #ff0000);
+  border:        4px solid #4c1130;
+  border-radius: 0px;
+  box-shadow:    0 4px #444444;
+  padding:       11px 23px;
+  color:         #ffffff;
+  display:       inline-block;
+  font:          normal 400 31px/1 "Roboto", sans-serif;
+  text-align:    center;
+  text-shadow:   2px 2px #000000;
+}
+Button:active {
+  background:    #000000;
+background:    -webkit-linear-gradient(#ff0000, #000000 50%, #ff0000);
+background:    linear-gradient(#ff0000, #000000 50%, #ff0000);
+border:        4px solid #4c1130;
+border-radius: 0px;
+box-shadow:    0 4px #444444;
+padding:       11px 23px;
+color:         #ffffff;
+display:       inline-block;
+font:          normal 400 31px/1 "Roboto", sans-serif;
+text-align:    center;
+text-shadow:   2px 2px #000000;
+}
+html #ui-bar {
+    display: none;
+}
+html #story {
+    margin: 2.5em;
+}
+@media screen and (max-width: 1136px) {
+    html #story {
+        margin: 1.5em;
+    }
+}
+@media screen and (max-width: 768px) {
+    html #story {
+        margin: 1.5em;
+    }
+}

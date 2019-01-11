@@ -1,0 +1,118 @@
+:: StorySettings
+ifid:6a275cc2-4838-41eb-82bc-89a1407d3499
+::StoryTitle
+My Game
+::animation
+<<silently>>
+<<if $enemyweapon is "rifle">>
+  <<set $enemydamage to $enemyrifledmg>>
+  <<set $enemyanimationset to $enemyrifleanim>>
+  <<set $enemysoundset to $riflesound>>
+<<elseif $enemyweapon is "pistol">>
+  <<set $enemydamage to $enemypistoldmg>>
+  <<set $enemyanimationset to $enemypistolanim>>
+  <<set $enemysoundset to $pistolsound>>
+<<elseif $enemyweapon is "shotgun">>
+  <<set $enemydamage to $enemyshotgundmg>>
+  <<set $enemyanimationset to $enemyshotgunanim>>
+  <<set $enemysoundset to $shotgunsound>>
+<<elseif $enemyweapon is "knife">>
+  <<set $enemydamage to $enemyknifedmg>>
+  <<set $enemyanimationset to $enemyknifeanim>>
+  <<set $enemysoundset to $knifesound>>
+<</if>>
+<<if $playerweapon is "rifle">>
+  <<set $playerdamage to $playerrifledmg>>
+  <<set $playeranimationset to $rifleanim>>
+  <<set $playersoundset to $riflesound>>
+<<elseif $playerweapon is "pistol">>
+  <<set $playerdamage to $playerpistoldmg>>
+  <<set $playeranimationset to $pistolanim>>
+  <<set $playersoundset to $pistolsound>>
+<<elseif $playerweapon is "shotgun">>
+  <<set $playerdamage to $playershotgundmg>>
+  <<set $playeranimationset to $shotgunanim>>
+  <<set $playersoundset to $shotgunsound>>
+<<elseif $playerweapon is "knife">>
+  <<set $playerdamage to $playerknifedmg>>
+  <<set $playersoundset to $knifesound>>
+  <<set $playeranimationset to $knifeanim>>
+<</if>>
+<<if $enemystatus is "reloading">>
+  <<set $enemycombatsound to $enemysoundset[2]>>
+  <<set $enemyanimation to $enemyanimationset[3]>>
+<<elseif $enemystatus is "idle">>
+  <<set $enemyanimation to $enemyanimationset[0]>>
+<<elseif $enemystatus is "attacking">>
+  <<if $enemyweapon is "knife">>
+  <<set $enemycombatsound to $enemysoundset[0]>>
+  <<set $enemyanimation to $enemyanimationset[1]>>
+<<else>>
+  <<set $enemycombatsound to $enemysoundset[1]>>
+  <<set $enemyanimation to $enemyanimationset[2]>>
+  <</if>>
+<</if>>
+<<if $enemystatus is "melee">>
+<<set $enemyanimation to $enemyanimationset[1]>>
+<<set $enemycombatsound to $enemysoundset[0]>>
+<</if>>
+<<if $playerstatus is "reloading">>
+<<set $playercombatsound to $playersoundset[2]>>
+  <<set $playeranimation to $playeranimationset[3]>>
+<<elseif $playerstatus is "idle">>
+  <<set $playeranimation to $playeranimationset[0]>>
+<<elseif $playerstatus is "attacking">>
+<<if $playerweapon is "knife">>
+    <<set $playeranimation to $playeranimationset[1]>>
+    <<set $playercombatsound to $playersoundset[0]>>
+  <<else>>
+    <<set $playeranimation to $playeranimationset[2]>>
+    <<set $playercombatsound to $playersoundset[1]>>
+<</if>>
+<</if>>
+<<if $playerweapon is "melee">>
+<<set $playercombatsound to $playersoundset[0]>>
+<<set $playeranimation to $playeranimationset[1]>>
+<</if>>
+<</silently>>
+
+<span class="floatright" id="enemyanimation">$enemyanimation</span>
+<span class="floatleft" id="animation">$playeranimation</span>
+::Start [start]
+<<silently>>
+<<display "init">>
+<</silently>>
+[[firstcombat]]
+::firstcombat
+<div class="container">
+<span id="healthbar"><<display "healthbar">></span> \
+<span id="enemyhealth"><<display "enemyhealth">></span>
+<span id="animation"><<display "animation">></span>
+<br>
+<br>
+<br>
+<center>
+<span id="attack">
+<<button "Attack">>
+  <<display "maincombat">>
+<</button>>
+<div class="row">
+  <div class="column">
+  <<click [img[../Assets/guns/G43.png]]>>
+  <<set $playerweapon to "shotgun">><<set $playerstatus to "idle">><<replace "#animation">><<display "animation">><</replace>><</click>>
+  </div>
+  <div class="column">
+  <<click [img[../Assets/guns/mp40.png]]>><<set $playerweapon to "rifle">><<set $playerstatus to "idle">><<replace "#animation">><<display "animation">><</replace>><</click>>
+  </div>
+  <div class="column">
+  <<click [img[../Assets/guns/knife_1.png]]>><<set $playerweapon to "knife">><<set $playerstatus to "idle">><<replace "#animation">><<display "animation">><</replace>><</click>>
+  </div>
+  <div class="column">
+  <<click [img[../Assets/guns/luger.png]]>><<set $playerweapon to "pistol">><<set $playerstatus to "idle">><<replace "#animation">><<display "animation">><</replace>><</click>>
+  </div>
+</div>
+</span>
+<span class="hidden">
+</center>
+</div>
+</span>

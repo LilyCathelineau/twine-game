@@ -1,0 +1,87 @@
+::healthbar
+<div class="progress float-left" style="width: 25%">
+  <div class="progress-bar bg-success progress-bar-striped"  role="progressbar"  @style="$playerhealthstyle" @aria-valuenow="$playerhealth" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+::enemyhealth
+<div class="progress float-right progress-bar-danger progress-bar-striped" style="width: 25%">
+  <div class="progress-bar bg-danger progress-bar-striped"  role="progressbar"  @style="$enemyhealthstyle" @aria-valuenow="$enemyhealth" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+::init
+<<silently>>
+<<set $playerhealth to 100>>
+<<set $enemyhealth to 100>>
+<<set $playerhealthstyle to "width: " + $playerhealth + "%">>
+<<set $enemyhealthstyle to "width: " + $enemyhealth + "%">>
+
+
+<<cacheaudio "meleesound" "../Assets/sound/weapons/meleesound.wav">>
+<<cacheaudio "pistolsound" "../Assets/sound/weapons/pistol.wav">>
+<<cacheaudio "shotgunsound" "../Assets/sound/weapons/shotgun.wav">>
+<<cacheaudio "riflesound" "../Assets/sound/weapons/rifle.wav">>
+<<cacheaudio "reloadsound" "../Assets/sound/weapons/reload.wav">>
+<<cacheaudio "meleegun" "../Assets/sound/weapons/hit01.flac">>
+
+<<set $playerpistolidle to '<img src="../Assets/animations/combat/handgun/idle/animation.gif">'>>
+<<set $enemypistolidle to '<img src="../Assets/animations/combat/handgun/idle/inverse-animation.gif">'>>
+<<set $playerpistolmelee to '<img src="../Assets/animations/combat/handgun/meleeattack/animation.gif">'>>
+<<set $enemypistolmelee to '<img src="../Assets/animations/combat/handgun/meleeattack/inverse-animation.gif">'>>
+<<set $playerpistolreload to '<img src="../Assets/animations/combat/handgun/reload/animation.gif">'>>
+<<set $enemypistolreload to '<img src="../Assets/animations/combat/handgun/reload/inverse-animation.gif">'>>
+<<set $playerpistolshoot to '<img src="../Assets/animations/combat/handgun/shoot/animation.gif">'>>
+<<set $enemypistolshoot to '<img src="../Assets/animations/combat/handgun/shoot/inverse-animation.gif">'>>
+<<set $playerknifeidle to '<img src="../Assets/animations/combat/knife/idle/animation.gif">'>>
+<<set $enemyknifeidle to '<img src="../Assets/animations/combat/knife/idle/inverse-animation.gif">'>>
+<<set $playerknifeatk to '<img src="../Assets/animations/combat/knife/atk/animation.gif">'>>
+<<set $enemyknifeatk to '<img src="../Assets/animations/combat/knife/atk/inverse-animation.gif">'>>
+<<set $playerknifemove to '<img src="../Assets/animations/combat/knife/move/animation.gif">'>>
+<<set $enemyknifemove to '<img src="../Assets/animations/combat/knife/move/inverse-animation.gif">'>>
+<<set $playerrifleidle to '<img src="../Assets/animations/combat/rifle/idle/animation.gif">'>>
+<<set $enemyrifleidle to '<img src="../Assets/animations/combat/rifle/idle/inverse-animation.gif">'>>
+<<set $playerriflemelee to '<img src="../Assets/animations/combat/rifle/meleeattack/animation.gif">'>>
+<<set $enemyriflemelee to '<img src="../Assets/animations/combat/rifle/meleeattack/inverse-animation.gif">'>>
+<<set $playerriflereload to '<img src="../Assets/animations/combat/rifle/reload/animation.gif">'>>
+<<set $enemyriflereload to '<img src="../Assets/animations/combat/rifle/reload/inverse-animation.gif">'>>
+<<set $playerrifleshoot to '<img src="../Assets/animations/combat/rifle/shoot/animation.gif">'>>
+<<set $enemyrifleshoot to '<img src="../Assets/animations/combat/rifle/shoot/inverse-animation.gif">'>>
+<<set $playershotgunidle to '<img src="../Assets/animations/combat/shotgun/idle/animation.gif">'>>
+<<set $enemyshotgunidle to '<img src="../Assets/animations/combat/shotgun/idle/inverse-animation.gif">'>>
+<<set $playershotgunmelee to '<img src="../Assets/animations/combat/shotgun/meleeattack/animation.gif">'>>
+<<set $enemyshotgunmelee to '<img src="../Assets/animations/combat/shotgun/meleeattack/animation.gif">'>>
+<<set $playershotgunreload to '<img src="../Assets/animations/combat/shotgun/reload/animation.gif">'>>
+<<set $enemyshotgunreload to '<img src="../Assets/animations/combat/shotgun/reload/inverse-animation.gif">'>>
+<<set $playershotgunshoot to '<img src="../Assets/animations/combat/shotgun/shoot/animation.gif">'>>
+<<set $enemyshotgunshoot to '<img src="../Assets/animations/combat/shotgun/shoot/inverse-animation.gif">'>>
+
+<<set $rifleanim to [""+ $playerrifleidle +"",""+ $playerriflemelee +"",""+ $playerrifleshoot +"",""+ $playerriflereload +""]>>
+<<set $pistolanim to [""+ $playerpistolidle +"",""+ $playerpistolmelee +"",""+ $playerpistolshoot +"",""+ $playerpistolreload +""]>>
+<<set $shotgunanim to [""+ $playershotgunidle +"", ""+ $playershotgunmelee +"", ""+ $playershotgunshoot +"", ""+ $playershotgunreload +""]>>
+<<set $knifeanim to [""+ $playerknifeidle +"", ""+ $playerknifeatk +""]>>
+
+<<set $enemyrifleanim to [""+ $enemyrifleidle +"", ""+$enemyriflemelee +"", ""+ $enemyrifleshoot +"", ""+ $enemyriflereload +""]>>
+<<set $enemypistolanim to [""+ $enemypistolidle +"", ""+ $enemypistolmelee +"", ""+ $enemypistolshoot +"", ""+ $enemypistolreload +""]>>
+<<set $enemyshotgunanim to [""+ $enemyshotgunidle +"", ""+ $enemyshotgunmelee +"", ""+ $enemyshotgunshoot +"", ""+ $enemyshotgunreload +""]>>
+<<set $enemyknifeanim to [""+ $enemyknifeidle +"", ""+ $enemyknifeatk +""]>>
+
+<<set $riflesound to ["meleegun", "riflesound", "reloadsound"]>>
+<<set $pistolsound to ["meleegun", "pistolsound", "reloadsound"]>>
+<<set $shotgunsound to ["meleegun", "shotgunsound", "reloadsound"]>>
+<<set $knifesound to ["meleesound"]>>
+
+
+<<set $playerlevel to 1>>
+
+<<set $enemypistoldmg to 5>>
+<<set $enemyrifledmg to 10>>
+<<set $enemyknifedmg to 15>>
+<<set $enemyshotgundmg to 20>>
+
+<<set $playerpistoldmg to 5>>
+<<set $playerrifledmg to 10>>
+<<set $playerknifedmg to 15>>
+<<set $playershotgundmg to 20>>
+
+<<set $enemyweapon to "rifle">>
+<<set $playerweapon to "rifle">>
+<<set $enemystatus to "idle">>
+<<set $playerstatus to "idle">>
+<</silently>>

@@ -1,0 +1,22 @@
+::maincombat
+<<silently>>
+<<script>> var hide = document.getElementById("attack"); hide.style.visibility = "hidden"; <</script>>
+<</silently>>
+<<display "winlosscheck">>
+<<timed 1s>><<set $playerstatus to "attacking">><<replace "#animation">><<display "animation">><</replace>><<audio $playercombatsound play>>
+<<next>><<set $playerstatus to "idle">><<replace "#animation">><<display "animation">><</replace>>
+<<next>><<set $enemystatus to "attacking">><<replace "#animation">><<display "animation">><</replace>><<audio $enemycombatsound play>>
+<<next>><<set $enemystatus to "idle">><<replace "#animation">><<display "animation">><</replace>>
+<<next 1ms>><<set $enemyhealth to $enemyhealth - $playerdamage, $playerhealth to $playerhealth - $enemydamage, $playerhealthstyle to "width: " + $playerhealth + "%",  $enemyhealthstyle to "width: " + $enemyhealth + "%">>
+<<next 1ms>><<replace "#enemyhealth">><<display "enemyhealth">><</replace>>
+<<next 1ms>><<replace "#healthbar">><<display "healthbar">><</replace>>
+<<next 1ms>><<script>> var hide = document.getElementById("attack"); hide.style.visibility = "visible"; <</script>>
+<<next 1ms>><<display "winlosscheck">>
+<</timed>>
+::winlosscheck
+<<if $playerhealth lte 0>>
+<<notify>><span style="color:red;font-weight:bold">You have lost</span><</notify>>
+<</if>>
+<<if $enemyhealth lte 0>>
+<<notify>><span style="color:darkolivegreen;font-weight:bold"><img src="../Assets/ui/coin.gif">You win</span><</notify>>
+<</if>>
