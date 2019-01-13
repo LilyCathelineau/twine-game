@@ -1,4 +1,4 @@
-# twine-ganme
+# twine-game
 an animated combat twine game
 <img src="combat-system.PNG"></img>
 # Features 
